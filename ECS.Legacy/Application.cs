@@ -10,6 +10,8 @@
 
             ecs.SetThreshold(20);
 
+            //Hej
+
             ecs.Regulate();
         }
     }
