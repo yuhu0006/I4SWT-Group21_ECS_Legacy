@@ -2,7 +2,7 @@
 
 namespace ECS.Legacy
 {
-    internal class TempSensor : ITempSensor
+    internal class TempSensor
     {
         private readonly Random gen = new Random();
 
