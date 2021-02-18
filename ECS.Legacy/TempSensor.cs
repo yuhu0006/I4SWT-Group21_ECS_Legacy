@@ -13,7 +13,6 @@ namespace ECS.Legacy
 
         public bool RunSelfTest()
         {
-            //HEJ
             return true;
         }
     }
