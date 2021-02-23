@@ -12,3 +12,10 @@ C:\Users\laohu\source\repos\4.semester\SoftwareTest\Exerice3_1\ECS.Legacy\obj\De
 C:\Users\laohu\source\repos\4.semester\SoftwareTest\Exerice3_1\ECS.Legacy\obj\Debug\ECS.Legacy.csproj.CoreCompileInputs.cache
 C:\Users\laohu\source\repos\4.semester\SoftwareTest\Exerice3_1\ECS.Legacy\obj\Debug\ECS.Legacy.exe
 C:\Users\laohu\source\repos\4.semester\SoftwareTest\Exerice3_1\ECS.Legacy\obj\Debug\ECS.Legacy.pdb
+C:\Users\magnu\source\repos\I4SWT-Group21_ECS_Legacy\ECS.Legacy\bin\Debug\ECS.Legacy.exe.config
+C:\Users\magnu\source\repos\I4SWT-Group21_ECS_Legacy\ECS.Legacy\bin\Debug\ECS.Legacy.exe
+C:\Users\magnu\source\repos\I4SWT-Group21_ECS_Legacy\ECS.Legacy\bin\Debug\ECS.Legacy.pdb
+C:\Users\magnu\source\repos\I4SWT-Group21_ECS_Legacy\ECS.Legacy\obj\Debug\ECS.Legacy.csprojAssemblyReference.cache
+C:\Users\magnu\source\repos\I4SWT-Group21_ECS_Legacy\ECS.Legacy\obj\Debug\ECS.Legacy.csproj.CoreCompileInputs.cache
+C:\Users\magnu\source\repos\I4SWT-Group21_ECS_Legacy\ECS.Legacy\obj\Debug\ECS.Legacy.exe
+C:\Users\magnu\source\repos\I4SWT-Group21_ECS_Legacy\ECS.Legacy\obj\Debug\ECS.Legacy.pdb
