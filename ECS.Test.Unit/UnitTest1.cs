@@ -1,22 +1,28 @@
+using NSubstitute;
 using NUnit.Framework;
 
 namespace ECS.Test.Unit
 {
     public class Tests
     {
+
+	    private IHeater _fakeHeater;
+	    private ITempSensor _fakeTempSensor;
+	    private ECS _uut;
         [SetUp]
         public void Setup()
         {
+	        _fakeHeater = Substitute.For<IHeater>();
+	        _fakeTempSensor = Substitute.For<ITempSensor>();
+
+	        _uut = new ECS(25, _fakeTempSensor, _fakeHeater);
 
         }
 
-        [TestCase(10)]
-        [TestCase(0)]
-        [TestCase(-9)]
-        public void GetThreshold_Test(int a)
+        [Test]
+        public void GetThreshold_Test()
         {
-            ECS UUT = new ECS(a,new FakeTempSensor(21), new FakeHeater());
-            Assert.That(UUT.GetThreshold(), Is.EqualTo(a));
+	        Assert.That(_uut.GetThreshold(), Is.EqualTo(25));
         }
 
         [TestCase(43)]
@@ -24,8 +30,8 @@ namespace ECS.Test.Unit
         [TestCase(-222)]
         public void GetTemp_Test(int a)
         {
-            ECS UUT = new ECS(21, new FakeTempSensor(a), new FakeHeater());
-            Assert.That(UUT.GetCurTemp(), Is.EqualTo(a));
+	        _fakeTempSensor.GetTemp().Returns(a);
+	        Assert.That(_uut.GetCurTemp(), Is.EqualTo(a));
         }
 
         [TestCase(10)]
@@ -33,43 +39,43 @@ namespace ECS.Test.Unit
         [TestCase(-9)]
         public void SetThreshold_Test(int a)
         {
-            ECS UUT = new ECS(10, new FakeTempSensor(21), new FakeHeater());
-            UUT.SetThreshold(a);
-            Assert.That(UUT.GetThreshold(), Is.EqualTo(a));
+	        _uut.SetThreshold(a);
+            Assert.That(_uut.GetThreshold(), Is.EqualTo(a));
         }
 
         [Test]
         public void RegulateHigh_Test()
         {
-            FakeHeater MyHeater = new FakeHeater();
-            ECS UUT = new ECS(10, new FakeTempSensor(21), MyHeater);
-            UUT.Regulate();
-            Assert.That(MyHeater.TurnOffCalled, Is.EqualTo(true));
+	        _fakeTempSensor.GetTemp().Returns(26);
+	        _uut.Regulate();
+	        _fakeHeater.Received(1).TurnOff();
         }
 
         [Test]
         public void RegulateLow_Test()
         {
-            FakeHeater MyHeater = new FakeHeater();
-            ECS UUT = new ECS(10, new FakeTempSensor(4), MyHeater);
-            UUT.Regulate();
-            Assert.That(MyHeater.TurnOnCalled, Is.EqualTo(true));
+	        _fakeTempSensor.GetTemp().Returns(24);
+	        _uut.Regulate();
+	        _fakeHeater.Received(1).TurnOn();
         }
 
         [Test]
         public void RegulateEqual_Test()
         {
-            FakeHeater MyHeater = new FakeHeater();
-            ECS UUT = new ECS(10, new FakeTempSensor(10), MyHeater);
-            UUT.Regulate();
-            Assert.That(MyHeater.TurnOffCalled, Is.EqualTo(true));
+	        _fakeTempSensor.GetTemp().Returns(25);
+	        _uut.Regulate();
+	        _fakeHeater.Received(1).TurnOff();
         }
 
-        [Test]
-        public void RunSelfTest_Test()
+        [TestCase(false, false, false)]
+        [TestCase(false, true, false)]
+        [TestCase(true, false, false)]
+        [TestCase(true, true, true)]
+        public void RunSelfTest_Test(bool hReturn, bool tReturn, bool Result)
         {
-            ECS UUT = new ECS(10, new FakeTempSensor(21), new FakeHeater());
-            Assert.That(UUT.RunSelfTest(), Is.EqualTo(true));
+	        _fakeTempSensor.RunSelfTest().Returns(tReturn);
+	        _fakeHeater.RunSelfTest().Returns(hReturn);
+            Assert.That(_uut.RunSelfTest(), Is.EqualTo(Result));
         }
 
     }
